@@ -78,4 +78,66 @@ public partial class Form1 : Form
         }
         dataGridView1.DataSource = arr;
     }
+
+    private void button7_Click(object sender, EventArgs e)
+    {
+        var m = Convert.ToInt32(textBox11.Text);
+        var n = Convert.ToInt32(textBox12.Text);
+        var a = Convert.ToInt32(textBox14.Text);
+        var b = Convert.ToInt32(textBox13.Text);
+        var arr = new int[m,n];
+        var r = new Random();
+        var zeroCols = new List<int>();
+
+
+        for (var i = 0; i < n; i++)
+        {
+            var isZero = false;
+            for (int j = 0; j < m; j++)
+            {
+                arr[j, i] = r.Next(a, b);
+                if(arr[j, i] == 0)
+                    isZero = true;
+            }
+            if(isZero)
+                zeroCols.Add(i);
+        }
+
+
+
+        for (int i = 0; i < n; i++)
+
+        {
+
+            string column = string.Format("Column{0}", i + 1);
+
+            dataGridView2.Columns.Add(column, column);
+
+        }
+
+
+        for (int row = 0; row < m; row++)
+
+        {
+
+            string[] currentColumn = new string[n];
+
+
+            for (int col = 0; col < n; col++)
+
+                currentColumn[col] = arr[row, col].ToString();
+
+
+            dataGridView2.Rows.Add(currentColumn);
+
+        }
+
+
+        var str = "םמלונא סעמכבצמג סמהונזארטו 0: ";
+        foreach (var item in zeroCols)
+        {
+            str += item + ", ";
+        }
+        label25.Text = str;
+    }
 }
